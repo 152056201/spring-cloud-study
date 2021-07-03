@@ -1,0 +1,31 @@
+server:
+  port: 80
+spring:
+  application:
+    name: consumer--hystrix
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+logging:
+  level:
+    ROOT: INFO
+    #\u9488\u5BF9\u6307\u5B9A\u7684\u7C7B \u8BBE\u7F6E\u8F93\u51FA\u7EA7\u522B
+    com.yh.order.hystrix.service.*: debug
+feign:
+  circuitbreaker:
+    enabled: true
+  client:
+    config:
+      default:
+        loggerLevel: FULL
+hystrix:
+  metrics:
+    enabled: true
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
